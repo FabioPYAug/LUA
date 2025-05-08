@@ -1,4 +1,4 @@
-## LUA V.1.10
+## LUA V.1.10.1
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/FabioPYAug/SOL?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/FabioPYAug/SOL?style=for-the-badge)
@@ -13,7 +13,7 @@ Ele oferece uma série de funcionalidades que vão desde comandos úteis para as
 
 
 <h3 align="center"> 
-	🚧  PATCH NOTES - LUA 1.10.1!  🚧
+	🚧 PATCH NOTES 🚧
 </h3>
 
 <h4>Sussurros Históricos</h4>
