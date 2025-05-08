@@ -12,10 +12,19 @@ Ele oferece uma série de funcionalidades que vão desde comandos úteis para as
 - Banco de imagens e ações: Utilizando um banco de dados em JSON, o bot é capaz de acessar e apresentar imagens e realizar ações pré-configuradas, trazendo mais dinâmica para as interações no servidor.
 
 
-<h4 align="center"> 
-	🚧  PREVISTO PARA A PRÓXIMA ATUALIZAÇÃO!  🚧
-</h4>
+<h3 align="center"> 
+	🚧  PATCH NOTES - LUA 1.10.1!  🚧
+</h3>
 
-- Atualização no comando "Risorius", com novas cartas;
-- Atualização no comando de Jogos gerais, com novo conjunto de jogo;
-- Atualização no comando "Loja", com novas mercadorias e sistema de recibo. 
+<h4>Sussurros Históricos</h4>
+>Adicionado *Circuz* 1 e 2 e *Tropical* 06, 07, 08, 09 e 10;
+
+>/sussurros - Pagar para descobrir segredinhos!!
+
+>Você pode descobrir qualquer resumo de qualquer campanha que quiser!
+
+<h4>/risorius - Ajustes</h4>
+
+>Agora você não pode votar mais de uma vez no "Duelo de Lendas";
+>A carta Echo não fica fixa em todas as outras cartas;
+>Não existe mais a carta "Sussurros Históricos";

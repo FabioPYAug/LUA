@@ -67,8 +67,7 @@ module.exports = {
                 await interaction.reply("# Sessão")
                 const musicas = new Map([
                     ["**Resumo:**", "https://youtu.be/-tNElSdS5y4?si=6sq54eQqll7mbhaV"],
-                    ["**HIDEN N SEEK:**", "https://youtu.be/MRRs5vZu-UM?si=oDfRjRPWluqtaDUH"],
-                    ["**MORTE DE ALGM:**", "https://youtu.be/tEXK-4cS3Rs?si=y5hUPlZuYmiyqQg4"],
+                    ["**ENTROU NA SALA PROIBIDA:**", "https://www.youtube.com/watch?v=D_wLYdmQqVk&list=PLJc7D6ZU_k71sFU5mdQ-4Ry0NkVksvy8m&index=16"],
                 ])
                 for (let [key, value] of musicas) {
                     texto = (`${key}   ./p ${value}\n\n${texto}`)}}
@@ -77,7 +76,7 @@ module.exports = {
             if(noiteescura == "Sons Ambiente"){
                 await interaction.reply("# Sons Ambiente")
                 const musicas = new Map([
-                    ["**Floresta:**", "https://youtu.be/DNwvIQEXHP4?si=L0LuPux1UlmmPOOr"]
+                    ["**Tranquilo:**", "https://www.youtube.com/watch?v=CV9HZ3YFhwQ&list=PLwryoAfU-TeazvVIoZMFiNHrcPRzNVnzq"]
                 ])
                 for (let [key, value] of musicas) {
                     texto = (`${key}   ./p ${value}\n\n${texto}`)}}
@@ -89,7 +88,8 @@ module.exports = {
                     ["**Investigação Séria:**", "https://www.youtube.com/watch?v=-h2iK_fxiXw"],
                     ["**Pavor:**", "https://youtu.be/VhqEPpEDbo0?si=lxsfVn3kCq32b4qK"],
                     ["**Investigar uma Sala:**", "https://youtu.be/1NRsjSVJQAo?si=shTXER8IAQMSLFXZ"],
-                    ["**Investigar padrão:**", "https://youtu.be/WJweIkWhpps?si=hYcMwIuoIXhTtxum"]
+                    ["**Investigar padrão:**", "https://youtu.be/WJweIkWhpps?si=hYcMwIuoIXhTtxum"],
+                    ["**Investigar COMPLETA:**", "https://www.youtube.com/watch?v=4i9u_hucAUs&list=PLwryoAfU-TeZVrcVaM3m8lfB2sNBO_mQf"]
                 ])
                 for (let [key, value] of musicas) {
                     texto = (`${key}   m!p ${value}\n\n${texto}`)}}
@@ -99,6 +99,8 @@ module.exports = {
                 await interaction.reply("# Suspense")
                 const musicas = new Map([
                     ["**Ansiedade (Tenso):**", "https://youtu.be/Ynum4kSlJJ4?si=k05-I2Y9pOiyLyuG"],
+                    ["**Tenso PRÉ-combate:**", "https://youtu.be/AgtcMuTfzEA?si=9alzBhvqvgzymFA9"],
+                    ["**SUPER TENSO:**", "https://www.youtube.com/watch?v=N3T4lpvpHVo&list=PLJc7D6ZU_k71sFU5mdQ-4Ry0NkVksvy8m&index=28"],
                 ])
                 for (let [key, value] of musicas) {
                     texto = (`${key}   m!p ${value}\n\n${texto}`)}}
@@ -106,8 +108,9 @@ module.exports = {
             //COMBATE
             if(noiteescura == "Combate"){
                 await interaction.reply("# Combate")
-                const musicas = new Map([
+                const musicas = new Map([ 
                     ["**Batalha:**", "https://www.youtube.com/watch?v=YRfaT7Z6dFo"],
+                    ["**Anarquicos:**", "https://youtu.be/g_YMeQDpIsc?si=tNKG62NmLM1NYNbR"],
                 ])
                 for (let [key, value] of musicas) {
                     texto = (`${key}   m!p ${value}\n\n${texto}`)}}
@@ -134,156 +137,156 @@ module.exports = {
             
             interaction.channel.send(texto)
         }
-        if(interaction.options.getString('noiteescura')){
-            return
-            const noiteescura = interaction.options.getString('noiteescura')
-            let texto = "."
+        // if(interaction.options.getString('noiteescura')){
+        //     return
+        //     const noiteescura = interaction.options.getString('noiteescura')
+        //     let texto = "."
 
-            //AMBIENTE TRANQUILO
-            if(noiteescura == "Ambiente Tranquilo"){
-                await interaction.reply("# Ambiente Tranquilo")
-                const musicas = new Map([
-                    ["**Ambiente Geral:**", "https://www.youtube.com/watch?v=ipFaubyDUT4"],
-                    ["**Ambiente Deserto:**", "https://www.youtube.com/watch?v=maYRisfQQvc"],
-                    ["**Ambiente Gelo:**", "https://www.youtube.com/watch?v=qD2ahwiPRBk&t=1056s"],
-                    ["**Ambiente Floresta:**", "https://www.youtube.com/watch?v=XxEhuSJF780"]
-                ])
-                for (let [key, value] of musicas) {
-                    texto = (`${key}   m!p ${value}\n\n${texto}`)}}
+        //     //AMBIENTE TRANQUILO
+        //     if(noiteescura == "Ambiente Tranquilo"){
+        //         await interaction.reply("# Ambiente Tranquilo")
+        //         const musicas = new Map([
+        //             ["**Ambiente Geral:**", "https://www.youtube.com/watch?v=ipFaubyDUT4"],
+        //             ["**Ambiente Deserto:**", "https://www.youtube.com/watch?v=maYRisfQQvc"],
+        //             ["**Ambiente Gelo:**", "https://www.youtube.com/watch?v=qD2ahwiPRBk&t=1056s"],
+        //             ["**Ambiente Floresta:**", "https://www.youtube.com/watch?v=XxEhuSJF780"]
+        //         ])
+        //         for (let [key, value] of musicas) {
+        //             texto = (`${key}   m!p ${value}\n\n${texto}`)}}
 
-            //RESUMO DA SESSÃO
-            if(noiteescura == "Resumo da Sessão"){
-                await interaction.reply("# Resumo da Sessão")
-                const musicas = new Map([
-                    ["**Resumo da Sessão:**", "https://youtu.be/u3EBlmzb9ds?si=TFgR93Q2b7c1eps2"],
-                ])
-                for (let [key, value] of musicas) {
-                    texto = (`${key}   m!p ${value}\n\n${texto}`)}}
+        //     //RESUMO DA SESSÃO
+        //     if(noiteescura == "Resumo da Sessão"){
+        //         await interaction.reply("# Resumo da Sessão")
+        //         const musicas = new Map([
+        //             ["**Resumo da Sessão:**", "https://youtu.be/u3EBlmzb9ds?si=TFgR93Q2b7c1eps2"],
+        //         ])
+        //         for (let [key, value] of musicas) {
+        //             texto = (`${key}   m!p ${value}\n\n${texto}`)}}
 
-            //LUA
-            if(noiteescura == "Lua"){
-                await interaction.reply("# Lua")
-                const musicas = new Map([
-                    ["**Frases da Lua:**", "https://youtu.be/4uKdU19drsw?si=ful8vI0-Y066Qnid"],
-                    ["**Escuridão:**", "https://www.youtube.com/watch?v=Jg_QwWE_5cY"]
-                ])
-                for (let [key, value] of musicas) {
-                    texto = (`${key}   m!p ${value}\n\n${texto}`)}}
+        //     //LUA
+        //     if(noiteescura == "Lua"){
+        //         await interaction.reply("# Lua")
+        //         const musicas = new Map([
+        //             ["**Frases da Lua:**", "https://youtu.be/4uKdU19drsw?si=ful8vI0-Y066Qnid"],
+        //             ["**Escuridão:**", "https://www.youtube.com/watch?v=Jg_QwWE_5cY"]
+        //         ])
+        //         for (let [key, value] of musicas) {
+        //             texto = (`${key}   m!p ${value}\n\n${texto}`)}}
 
-            //COMBATE GERAL
-            if(noiteescura == "Combate Geral"){
-                await interaction.reply("# Combate Geral")
-                const musicas = new Map([
-                    ["**Iniciativa:**", "https://youtu.be/BynCpEWBRxs?si=SDvteYg2BPhxXzzv"],
-                    ["**Combate Pesado:**", "https://www.youtube.com/watch?v=TVkWheiLVFA&list=PLwryoAfU-TeZ6LscW0fORjdWOVflwT6RX&index=1"],
-                    ["**Combate Elaborado:**", "https://www.youtube.com/watch?v=THiK__o054E&list=PLwryoAfU-TeYd1jVCig-d7uFgWMJ-7oNi&index=1"],
-                    ["**Combate Medieval:**", "https://www.youtube.com/watch?v=t3B802PIuB0"]
-                ])
-                for (let [key, value] of musicas) {
-                    texto = (`${key}   m!p ${value}\n\n${texto}`)}}
+        //     //COMBATE GERAL
+        //     if(noiteescura == "Combate Geral"){
+        //         await interaction.reply("# Combate Geral")
+        //         const musicas = new Map([
+        //             ["**Iniciativa:**", "https://youtu.be/BynCpEWBRxs?si=SDvteYg2BPhxXzzv"],
+        //             ["**Combate Pesado:**", "https://www.youtube.com/watch?v=TVkWheiLVFA&list=PLwryoAfU-TeZ6LscW0fORjdWOVflwT6RX&index=1"],
+        //             ["**Combate Elaborado:**", "https://www.youtube.com/watch?v=THiK__o054E&list=PLwryoAfU-TeYd1jVCig-d7uFgWMJ-7oNi&index=1"],
+        //             ["**Combate Medieval:**", "https://www.youtube.com/watch?v=t3B802PIuB0"]
+        //         ])
+        //         for (let [key, value] of musicas) {
+        //             texto = (`${key}   m!p ${value}\n\n${texto}`)}}
             
-            //BARES
-            if(noiteescura == "Bares"){
-                await interaction.reply("# Bares")
-                const musicas = new Map([
-                    ["**Taverna Padrão:**", "https://youtu.be/vyg5jJrZ42s?si=sNxqYVP6pxhCHzD_"],
-                    ["**Taverna Calma:**", "https://www.youtube.com/watch?v=bQBbRWo0j5g"],
-                    ["**Taverna Festa/Festival:**", "https://www.youtube.com/watch?v=7k3TtxqGqsk"],
-                    ["**Taverna Famosa:**", "https://www.youtube.com/watch?v=kfbYb5yfaE8"],
-                    ["**Taverna Afastada:**", "https://youtu.be/-ae4GgctPaM?si=m6fi2B9oq5Ktn8c_"],
-                    ["**Taverna no Deserto:**", "https://youtu.be/dhA8BtU8MaI?si=Pot1Wlq4S7sMg-8K"],
-                    ["**Taverna Jogos e Apostas:**", "https://www.youtube.com/watch?v=u2jLHdpo2AQ"],
-                    ["**Taverna no Gelo:**", "https://youtu.be/orgikrTCKTc?si=DhVJAhuWRGLe_VhU"]
-                ])
-                for (let [key, value] of musicas) {
-                    texto = (`${key}   m!p ${value}\n\n${texto}`)}}
+        //     //BARES
+        //     if(noiteescura == "Bares"){
+        //         await interaction.reply("# Bares")
+        //         const musicas = new Map([
+        //             ["**Taverna Padrão:**", "https://youtu.be/vyg5jJrZ42s?si=sNxqYVP6pxhCHzD_"],
+        //             ["**Taverna Calma:**", "https://www.youtube.com/watch?v=bQBbRWo0j5g"],
+        //             ["**Taverna Festa/Festival:**", "https://www.youtube.com/watch?v=7k3TtxqGqsk"],
+        //             ["**Taverna Famosa:**", "https://www.youtube.com/watch?v=kfbYb5yfaE8"],
+        //             ["**Taverna Afastada:**", "https://youtu.be/-ae4GgctPaM?si=m6fi2B9oq5Ktn8c_"],
+        //             ["**Taverna no Deserto:**", "https://youtu.be/dhA8BtU8MaI?si=Pot1Wlq4S7sMg-8K"],
+        //             ["**Taverna Jogos e Apostas:**", "https://www.youtube.com/watch?v=u2jLHdpo2AQ"],
+        //             ["**Taverna no Gelo:**", "https://youtu.be/orgikrTCKTc?si=DhVJAhuWRGLe_VhU"]
+        //         ])
+        //         for (let [key, value] of musicas) {
+        //             texto = (`${key}   m!p ${value}\n\n${texto}`)}}
             
-            //INVESTIGAÇÃO
-            if(noiteescura == "Investigação"){
-                await interaction.reply("# Investigação")
-                const musicas = new Map([
-                    ["**Investigação Padrão:**", "https://www.youtube.com/watch?v=sGQFWM19DEw"],
-                    ["**Algo Importante:**", "https://www.youtube.com/watch?v=aseJg4Truyc"]
-                ])
-                for (let [key, value] of musicas) {
-                    texto = (`${key}   m!p ${value}\n\n${texto}`)}}
+        //     //INVESTIGAÇÃO
+        //     if(noiteescura == "Investigação"){
+        //         await interaction.reply("# Investigação")
+        //         const musicas = new Map([
+        //             ["**Investigação Padrão:**", "https://www.youtube.com/watch?v=sGQFWM19DEw"],
+        //             ["**Algo Importante:**", "https://www.youtube.com/watch?v=aseJg4Truyc"]
+        //         ])
+        //         for (let [key, value] of musicas) {
+        //             texto = (`${key}   m!p ${value}\n\n${texto}`)}}
             
-            //SUSPENSE
-            if(noiteescura == "Suspense"){
-                await interaction.reply("# Suspense")
-                const musicas = new Map([
-                    ["**Suspense Padrão:**", "https://www.youtube.com/watch?v=EApZmmYg_oQ"],
-                    ["**Suspense Tenso:**", "https://www.youtube.com/watch?v=fv_7EurNAss&t=1s"],
-                    ["**Algo está errado:**", "https://www.youtube.com/watch?v=CNf6BL8gwbw"]
-                ])
-                for (let [key, value] of musicas) {
-                    texto = (`${key}   m!p ${value}\n\n${texto}`)}}
+        //     //SUSPENSE
+        //     if(noiteescura == "Suspense"){
+        //         await interaction.reply("# Suspense")
+        //         const musicas = new Map([
+        //             ["**Suspense Padrão:**", "https://www.youtube.com/watch?v=EApZmmYg_oQ"],
+        //             ["**Suspense Tenso:**", "https://www.youtube.com/watch?v=fv_7EurNAss&t=1s"],
+        //             ["**Algo está errado:**", "https://www.youtube.com/watch?v=CNf6BL8gwbw"]
+        //         ])
+        //         for (let [key, value] of musicas) {
+        //             texto = (`${key}   m!p ${value}\n\n${texto}`)}}
 
-            //REVOLUCIONÁRIOS
-            if(noiteescura == "Revolucionários"){
-                await interaction.reply("# Revolucionários")
-                const musicas = new Map([
-                    ["**Revolucionários Padrão:**", "https://youtu.be/7T3SU4Ht1Yw?si=d0uqB3kTqSl8heF5"],
-                    ["**Sala do Poyo:**", "https://youtu.be/4JWANCA-Pbw?si=5taqn-wogfurhR5d"],
-                    ["**Sala da Sanara:**", "https://www.youtube.com/watch?v=g1tnWLa8sDA"],
-                    ["**Sala do Keanu:**", "https://www.youtube.com/watch?v=GPS__dZQVc4"],
-                    ["**Sala da Tina:**", "https://youtu.be/Q3CJ0tUevxQ?si=ZdWDd6j8Gw82ZLEt"],
-                    ["**Sala da Fahlir:**", "https://www.youtube.com/watch?v=BvMKa8c_Elg"]
-                ])
-                for (let [key, value] of musicas) {
-                    texto = (`${key}   m!p ${value}\n\n${texto}`)}}
+        //     //REVOLUCIONÁRIOS
+        //     if(noiteescura == "Revolucionários"){
+        //         await interaction.reply("# Revolucionários")
+        //         const musicas = new Map([
+        //             ["**Revolucionários Padrão:**", "https://youtu.be/7T3SU4Ht1Yw?si=d0uqB3kTqSl8heF5"],
+        //             ["**Sala do Poyo:**", "https://youtu.be/4JWANCA-Pbw?si=5taqn-wogfurhR5d"],
+        //             ["**Sala da Sanara:**", "https://www.youtube.com/watch?v=g1tnWLa8sDA"],
+        //             ["**Sala do Keanu:**", "https://www.youtube.com/watch?v=GPS__dZQVc4"],
+        //             ["**Sala da Tina:**", "https://youtu.be/Q3CJ0tUevxQ?si=ZdWDd6j8Gw82ZLEt"],
+        //             ["**Sala da Fahlir:**", "https://www.youtube.com/watch?v=BvMKa8c_Elg"]
+        //         ])
+        //         for (let [key, value] of musicas) {
+        //             texto = (`${key}   m!p ${value}\n\n${texto}`)}}
 
-            //DAIMONAS
-            if(noiteescura == "Daimonas"){
-                await interaction.reply("# Daimonas")
-                const musicas = new Map([
-                    ["**Daimonas Padrão:**", "https://youtu.be/ddMSMwKQkKI?si=8AvREQlbD17uYhVW"],
-                    ["**Pácê:**", "https://www.youtube.com/watch?v=L174Wh1Ahxc"],
-                    ["**Blácê:**", "https://www.youtube.com/watch?v=0fIn9BrWHE4&list=PLwryoAfU-TeZc2sJXDjHgmsSOjJbWwZsw"],
-                    ["**Apostas:**", "https://youtu.be/cGUAp_xoi4o?si=Zus8C1XddQAaYYKk"],
-                    ["**Bola de Fogo:**", "https://www.youtube.com/watch?v=fzRDvc7jekY"]
-                ])
-                for (let [key, value] of musicas) {
-                    texto = (`${key}   m!p ${value}\n\n${texto}`)}}
+        //     //DAIMONAS
+        //     if(noiteescura == "Daimonas"){
+        //         await interaction.reply("# Daimonas")
+        //         const musicas = new Map([
+        //             ["**Daimonas Padrão:**", "https://youtu.be/ddMSMwKQkKI?si=8AvREQlbD17uYhVW"],
+        //             ["**Pácê:**", "https://www.youtube.com/watch?v=L174Wh1Ahxc"],
+        //             ["**Blácê:**", "https://www.youtube.com/watch?v=0fIn9BrWHE4&list=PLwryoAfU-TeZc2sJXDjHgmsSOjJbWwZsw"],
+        //             ["**Apostas:**", "https://youtu.be/cGUAp_xoi4o?si=Zus8C1XddQAaYYKk"],
+        //             ["**Bola de Fogo:**", "https://www.youtube.com/watch?v=fzRDvc7jekY"]
+        //         ])
+        //         for (let [key, value] of musicas) {
+        //             texto = (`${key}   m!p ${value}\n\n${texto}`)}}
 
-            //LOJAS
-            if(noiteescura == "Lojas"){
-                await interaction.reply("# Lojas")
-                const musicas = new Map([
-                    ["**Itens Mágicos:**", "https://www.youtube.com/watch?v=tpi5qsXm_cM&t=39s"],
-                    ["**Loja de Comidas:**", "https://www.youtube.com/watch?v=ljTfHitG0eA"],
-                    ["**Loja Geral:**", "https://www.youtube.com/watch?v=rjyROIFCzbo"]
-                ])
-                for (let [key, value] of musicas) {
-                    texto = (`${key}   m!p ${value}\n\n${texto}`)}}
+        //     //LOJAS
+        //     if(noiteescura == "Lojas"){
+        //         await interaction.reply("# Lojas")
+        //         const musicas = new Map([
+        //             ["**Itens Mágicos:**", "https://www.youtube.com/watch?v=tpi5qsXm_cM&t=39s"],
+        //             ["**Loja de Comidas:**", "https://www.youtube.com/watch?v=ljTfHitG0eA"],
+        //             ["**Loja Geral:**", "https://www.youtube.com/watch?v=rjyROIFCzbo"]
+        //         ])
+        //         for (let [key, value] of musicas) {
+        //             texto = (`${key}   m!p ${value}\n\n${texto}`)}}
             
-            //OSTs
-            if(noiteescura == "OSTs"){
-                await interaction.reply("# OSTs")
-                const musicas = new Map([
-                    ["**Ashura:**", "https://youtu.be/fI_nqyKdA54?si=HI2IJEstIku2qBM5"],
-                    ["**Bobby:**", "https://youtu.be/0dlHtgodzoE?si=BC4x6aDl4g5yN5s3"],
-                    ["**Deus da Inteligência:**", "https://www.youtube.com/watch?v=RG1ydqEEa0c"]
-                ])
-                for (let [key, value] of musicas) {
-                    texto = (`${key}   m!p ${value}\n\n${texto}`)}}
+        //     //OSTs
+        //     if(noiteescura == "OSTs"){
+        //         await interaction.reply("# OSTs")
+        //         const musicas = new Map([
+        //             ["**Ashura:**", "https://youtu.be/fI_nqyKdA54?si=HI2IJEstIku2qBM5"],
+        //             ["**Bobby:**", "https://youtu.be/0dlHtgodzoE?si=BC4x6aDl4g5yN5s3"],
+        //             ["**Deus da Inteligência:**", "https://www.youtube.com/watch?v=RG1ydqEEa0c"]
+        //         ])
+        //         for (let [key, value] of musicas) {
+        //             texto = (`${key}   m!p ${value}\n\n${texto}`)}}
             
-            //EMOCIONANTE
-            if(noiteescura == "Emocionante"){
-                await interaction.reply("# Emocionante")
-                const musicas = new Map([
-                    ["**Morte Honrosa:**", "https://www.youtube.com/watch?v=CO4-SwN-D-s"],
-                    ["**Morte de Jogador:**", "https://www.youtube.com/watch?v=TWN_AkPDqQc"],
-                    ["**Emocionante Geral:**", "https://www.youtube.com/watch?v=qywKyXfswsg"],
-                    ["**Nostalgia:**", "https://www.youtube.com/watch?v=DLWqxqMYlXE"]
-                ])
-                for (let [key, value] of musicas) {
-                    texto = (`${key}   m!p ${value}\n\n${texto}`)}}
+        //     //EMOCIONANTE
+        //     if(noiteescura == "Emocionante"){
+        //         await interaction.reply("# Emocionante")
+        //         const musicas = new Map([
+        //             ["**Morte Honrosa:**", "https://www.youtube.com/watch?v=CO4-SwN-D-s"],
+        //             ["**Morte de Jogador:**", "https://www.youtube.com/watch?v=TWN_AkPDqQc"],
+        //             ["**Emocionante Geral:**", "https://www.youtube.com/watch?v=qywKyXfswsg"],
+        //             ["**Nostalgia:**", "https://www.youtube.com/watch?v=DLWqxqMYlXE"]
+        //         ])
+        //         for (let [key, value] of musicas) {
+        //             texto = (`${key}   m!p ${value}\n\n${texto}`)}}
 
             
             
-            interaction.channel.send(texto)
-        }
+        //     interaction.channel.send(texto)
+        // }
 
         timeout.push(interaction.user.id);
         setTimeout(() => {

@@ -141,7 +141,7 @@ module.exports = {
             console.log(`Valor natural: ${roletabobby}`)
             roletabobby = EFEITOS(roletabobby, user, interaction);
             if (EventoAtual != "normal") {
-                //roletabobby = EVENTOS(roletabobby, EventoAtual, interaction, interaction.guild)
+                roletabobby = await EVENTOS(roletabobby, EventoAtual, interaction, interaction.guild)
             }
         } else {
             roletabobby == datafrase.infos.espelho
@@ -1086,23 +1086,36 @@ module.exports = {
                             .setCustomId('voto1')
                             .setLabel(duelo1)
                             .setStyle(ButtonStyle.Primary);
-
+                    
                         const botao2 = new ButtonBuilder()
                             .setCustomId('voto2')
                             .setLabel(duelo2)
                             .setStyle(ButtonStyle.Danger);
-
+                    
                         const botoes = new ActionRowBuilder().addComponents(botao1, botao2);
                         const mensagem = await interaction.channel.send({ embeds: [DUELO], components: [botoes] });
+                    
                         const votos = { duelo1: 0, duelo2: 0 };
-                        const collector = mensagem.createMessageComponentCollector({ filter: i => i.customId === 'voto1' || i.customId === 'voto2', time: 30000 });
+                        const votedUsers = new Set();
+                    
+                        const collector = mensagem.createMessageComponentCollector({
+                            filter: i => i.customId === 'voto1' || i.customId === 'voto2',
+                            time: 30000
+                        });
+                    
                         collector.on('collect', async i => {
+                            if (votedUsers.has(i.user.id)) {
+                                await i.reply({ content: 'Você já votou neste duelo!', ephemeral: true });
+                                return;
+                            }
+                    
+                            votedUsers.add(i.user.id);
                             if (i.customId === 'voto1') votos.duelo1++;
                             if (i.customId === 'voto2') votos.duelo2++;
-
+                    
                             await i.reply({ content: `Você votou em **${i.customId === 'voto1' ? duelo1 : duelo2}**!`, ephemeral: true });
                         });
-
+                    
                         collector.on('end', () => {
                             let resultado;
                             if (votos.duelo1 > votos.duelo2) {
@@ -1112,7 +1125,7 @@ module.exports = {
                             } else {
                                 resultado = `🤝 Empate entre **${duelo1}** e **${duelo2}**!`;
                             }
-
+                    
                             DUELO.addFields({ name: "Resultado Final", value: resultado });
                             mensagem.edit({ embeds: [DUELO], components: [] });
                         });
@@ -1333,7 +1346,7 @@ module.exports = {
                     embeds.setImage(randomboss)
                 }
                 //FRASERNATOR
-                if (roletabobby > 624 && roletabobby <= 633) {
+                if (roletabobby > 624 && roletabobby <= 643) {
                     const { frasenator } = datafrase;
                     const { outros, copulativo, adjetivos, acoes, objetos } = frasenator;
 
@@ -1374,58 +1387,8 @@ module.exports = {
 
                     interaction.channel.send(`<@${interaction.user.id}> ${frase}`);
                 }
-                //SUSSURROS HISTÓRICOS
-                if (roletabobby > 633 && roletabobby <= 652) {
-                    embeds.setTitle("SUSSURROS HISTÓRICOS")
-                    embeds.setDescription("Essa carta irá sussurrar para você um conto de uma das sessões de RPG dentro deste servidor!")
-                    embeds.setThumbnail("https://images2.imgbox.com/9a/53/lPKMWJ37_o.png")
-                    const frasesbobby = JSON.parse(fs.readFileSync(frasespath, 'utf-8')).sussurros;
-                    const randomIndex = Math.floor(Math.random() * frasesbobby.length);
-                    let randomMeme = "."
-                    let imagem = "."
-                    if (randomIndex == 0) {
-                        const random = frasesbobby[randomIndex].EMPIREO
-                        randomMeme = random[Math.floor(Math.random() * random.length)];
-                        imagem = "https://images2.imgbox.com/c9/61/D0xuAP00_o.png"
-                    }
-                    if (randomIndex == 1) {
-                        const random = frasesbobby[randomIndex].EDFU
-                        randomMeme = random[Math.floor(Math.random() * random.length)];
-                        imagem = "https://images2.imgbox.com/7f/82/0s1UlP5q_o.png"
-                    }
-                    if (randomIndex == 2) {
-                        const random = frasesbobby[randomIndex].NOITEESCURA
-                        randomMeme = random[Math.floor(Math.random() * random.length)];
-                        imagem = "https://images2.imgbox.com/a1/46/xkfejCBm_o.png"
-                    }
-                    if (randomIndex == 3) {
-                        const random = frasesbobby[randomIndex].AFANO
-                        randomMeme = random[Math.floor(Math.random() * random.length)];
-                        imagem = "https://images2.imgbox.com/4a/1e/jZ4jAfgH_o.png"
-                    }
-                    if (randomIndex == 4) {
-                        const random = frasesbobby[randomIndex].TROPICAL
-                        randomMeme = random[Math.floor(Math.random() * random.length)];
-                        imagem = "https://images2.imgbox.com/80/f4/ZuEe2Pve_o.png"
-                    }
-                    if (randomIndex == 5) {
-                        const random = frasesbobby[randomIndex].THANATOS
-                        randomMeme = random[Math.floor(Math.random() * random.length)];
-                        imagem = "https://images2.imgbox.com/40/b1/zwuJIKfb_o.png"
-                    }
-                    if (randomIndex == 6) {
-                        const random = frasesbobby[randomIndex].SOLARENS
-                        randomMeme = random[Math.floor(Math.random() * random.length)];
-                        imagem = "https://images2.imgbox.com/b6/52/q7Nf0vdh_o.png"
-                    }
-                    const frases = "*sussurros...*\n\n\n" + "# " + randomMeme
-                    interaction.user.send({
-                        content: frases,
-                        files: [{ attachment: imagem }]
-                    })
-                }
                 //PADRÃOZINHO
-                if (roletabobby > 652 && roletabobby <= 661) {
+                if (roletabobby > 643 && roletabobby <= 661) {
                     embeds.setTitle(`PADRÃOZINHO`)
                     embeds.setDescription(`Essa carta mostra o quão padrão você é na visão do Bobby. Você é tão padrão que ele vai fazer a sua próxima carta ser uma comum garantido.`)
                     embeds.setThumbnail("https://images2.imgbox.com/c3/08/EOYDhOEk_o.png")
@@ -2009,7 +1972,7 @@ module.exports = {
                     const nomebobby = "Bobby";
                     const avatarbobby = "https://images2.imgbox.com/0e/f6/mNnY7rrO_o.png";
                     const caos = Math.floor(Math.random() * 200) + 1;
-                    const tempoCaos = Math.floor(Math.random() * (60000 - 10000 + 1)) + 10000;
+                    const tempoCaos = Math.floor(Math.random() * (6000 - 1000 + 1)) + 1000;
                     const ideiasid = '1157781850442436680';
                     const ideias = interaction.client.channels.cache.get(ideiasid);
                     interaction.client.user.setAvatar(avatarbobby);
@@ -2041,7 +2004,7 @@ module.exports = {
                                         const randmnomes = nomes[Math.floor(Math.random() * nomes.length)];
 
 
-                                        const idsUsuarios = Object.values(Ids.usuarios).filter(id => id !== "424982351593078785"); // Remove Fábio
+                                        const idsUsuarios = Object.values(Ids.usuarios).filter(id => id !== "424982351593078785");
                                         const vitimaId = idsUsuarios[Math.floor(Math.random() * idsUsuarios.length)];
                                         console.log(vitimaId)
                                         interaction.guild.members.fetch(vitimaId)
@@ -2271,6 +2234,7 @@ module.exports = {
             }
             writeDataFraseToFile(datafrase)
             embeds.setImage(null)
+            embeds.setFields([]);
         }
         timeout[interaction.user.id] = Date.now();
     }
