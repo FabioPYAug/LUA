@@ -16,14 +16,14 @@ Ele oferece uma série de funcionalidades que vão desde comandos úteis para as
 </h4>
 
 <h4>Sussurros Históricos</h4>
->Adicionado *Circuz* 1 e 2 e *Tropical* 06, 07, 08, 09 e 10;
+-Adicionado Circuz 1 e 2 e Tropical 06, 07, 08, 09 e 10;
 
->/sussurros - Pagar para descobrir segredinhos!!
+- /sussurros - Pagar para descobrir segredinhos!!
 
->Você pode descobrir qualquer resumo de qualquer campanha que quiser!
+- Você pode descobrir qualquer resumo de qualquer campanha que quiser!
 
 <h4>/risorius - Ajustes</h4>
 
->Agora você não pode votar mais de uma vez no "Duelo de Lendas";
->A carta Echo não fica fixa em todas as outras cartas;
->Não existe mais a carta "Sussurros Históricos";
+- Agora você não pode votar mais de uma vez no "Duelo de Lendas";
+- A carta Echo não fica fixa em todas as outras cartas;
+- Não existe mais a carta "Sussurros Históricos";
