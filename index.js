@@ -1,5 +1,7 @@
 const { Client, Events, GatewayIntentBits, Collection } = require('discord.js')
 
+const Citação = require('./includes/Timers.js');
+
 // dotenv
 const dotenv = require('dotenv')
 dotenv.config()
@@ -74,6 +76,8 @@ client.on(Events.InteractionCreate, async interaction =>{
         console.error("Comando não encontrado")
         return
     }
+    console.log(`💫Comando usado: ${interaction.commandName} | 👤Usuário: ${interaction.user.tag}`);
+
     try {
         await command.execute(interaction)
     } 
@@ -117,3 +121,6 @@ if (process.argv[2] === 'test') {
 
     simulateCommand(commandName, options);
 }
+
+//ENVIO DE CITAÇÃO AUTOMATICO
+setInterval(() => Citação(client, 21, 0, "1099028132884926638"), 60000);

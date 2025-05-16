@@ -74,7 +74,7 @@ module.exports = {
                 });
             }
         } catch (error) {
-            await interaction.reply({ content: 'Não foi possível enviar a mensagem no privado.', ephemeral: true });
+            await interaction.channel.send('Não foi possível enviar a mensagem no privado.');
         }
     },
 };

@@ -13,7 +13,7 @@ Ele oferece uma série de funcionalidades que vão desde comandos úteis para as
 
 
 <h3 align="center"> 
-	🚧 PATCH NOTES 🚧
+	🚧 PATCH NOTES 1.12.0🚧
 </h3>
 
 <h4>Sussurros Históricos</h4>
