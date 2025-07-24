@@ -35,4 +35,3 @@
 
 - O sistema **Risorius** ficará em **pausa temporária**.
 - Ele está sendo **refatorado** para futuras melhorias e novas funcionalidades.
-
