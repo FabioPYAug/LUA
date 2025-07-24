@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js")
+const { aplicarDinheiro, VerificarDinheiro, Ids } = require('../includes/functions.js');
 const fs = require('fs');
-const adm = "1099030674574422107"
 
 var timeout = [];
 const milesegundos = 86400000;
@@ -12,16 +12,10 @@ module.exports = {
         .setDescription("Glória ao Sol!"),
 
     async execute(interaction) {
+        const user = interaction.member;
         if (timeout.includes(interaction.user.id)) return await interaction.reply({ content: `Este comando só pode ser usado uma vez a cada ${segundos} horas!`, ephemeral: true});
-        writeDataToFile(data);
-        if (!user.roles.cache.has(adm)) {
-            return interaction.reply({ content: 'Você não tem permissão para usar este comando.', ephemeral: true });
-        }
         await interaction.reply("# Glória ao Sol☀")
-        const nomenormal = "Sol"
-        const avatarnormal = 'https://images2.imgbox.com/ab/02/NkhBxxrT_o.png'; 
-        interaction.client.user.setAvatar(avatarnormal);
-        interaction.client.user.setUsername(nomenormal);
+        aplicarDinheiro(user, 250, interaction.guild);
 
         timeout.push(interaction.user.id);
         setTimeout(() => {

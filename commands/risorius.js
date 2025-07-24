@@ -84,7 +84,6 @@ const cooldowns = {
 let bloqueio
 let imperador
 let ninho
-datafrase.eventos.tipo = "normal"
 let roletabobby = 1
 let ancestral = 1
 function getporce(mini, maxi) {
@@ -99,17 +98,11 @@ module.exports = {
     async execute(interaction) {
         console.log("<---------------------------------------------------->")
         const user = interaction.member;
-
-        const EventoAtual = datafrase.eventos.tipo
-        console.log("O Evento atual é: " + EventoAtual)
         ninho = datafrase.infos.ninho
         imperador = datafrase.infos.dinastia
         //BLOQUEADO
-        if (EventoAtual == "bloqueado") {
-            interaction.reply({ content: "O Risorius está preparando um evento!", ephemeral: true })
-            return
-        } else if (user.roles.cache.has(BAN)) {
-            interaction.reply({ content: "Você está banido do Risorius.", ephemeral: true })
+        if (!user.roles.cache.has(ADM)) {
+            interaction.reply({ content: "Risorius está sendo atualizado! Novidades em breve...", ephemeral: true })
             return
         }
 
@@ -140,9 +133,6 @@ module.exports = {
             await EVOLUCAO(user, interaction)
             console.log(`Valor natural: ${roletabobby}`)
             roletabobby = EFEITOS(roletabobby, user, interaction);
-            if (EventoAtual != "normal") {
-                roletabobby = await EVENTOS(roletabobby, EventoAtual, interaction, interaction.guild)
-            }
         } else {
             roletabobby == datafrase.infos.espelho
             datafrase.dados.espelho++
@@ -167,13 +157,6 @@ module.exports = {
             bloqueio = false;
             return
         } else {
-
-            //RAID
-            if (EventoAtual == "raid") {
-                const valor = await RaidBoss(datafrase.eventos.chefe, user);
-                interaction.channel.send({ embeds: [valor] });
-            }
-
             datafrase = readDataFraseFromFile();
             console.log(`Valor com efeitos: ${roletabobby}`)
             await interaction.reply("Abrindo pacote de cartas...")
@@ -371,36 +354,14 @@ module.exports = {
                     embeds.setThumbnail("https://images2.imgbox.com/c1/1c/MTLdc75F_o.png")
                 }
                 //ABENÇOADO
-                if (roletabobby > 997 && roletabobby <= 1020) {
+                if (roletabobby > 997 && roletabobby <= 1030) {
                     embeds.setTitle(`GLÓRIA AO SOL`)
                     embeds.setDescription(`Uma divindade te toca, dando-lhe uma bênção. Essa carta faz com que a sua próxima carta tenha uma ENORME sorte. Que o calor do Sol traga paz a sua alma...`)
                     embeds.setThumbnail("https://images2.imgbox.com/e6/b3/5MS4ub3v_o.png")
                     adicionarRole(interaction.member, Ids.unicos.Bencao, "BFFS")
                 }
-                //COMUNGAR
-                if (roletabobby > 1020 && roletabobby <= 1040) {
-                    if (datafrase.eventos.tipo != "normal") { roletabobby = 990 }
-                    if (roletabobby >= 1020 && roletabobby <= 1040) {
-                        embeds.setTitle(`COMUNGAR`)
-                        embeds.setDescription(`Essa carta irá trazer uma bênção para todos do servidor, compartilhando entre todos a mais boa e pura bondade, aumentando a sorte das cartas de todos por 60 minutos. Esse evento vai acontecer em 1 minuto...\n\n(Essa sorte acumula com outros status)`)
-                        embeds.setThumbnail("https://images2.imgbox.com/f6/d6/vcgIVFvO_o.png")
-                        datafrase.eventos.tipo = "bloqueado"
-                        datafrase.dados.cartastipoevento++
-                        writeDataFraseToFile(datafrase)
-                        setTimeout(async () => {
-                            interaction.channel.send(`@everyone ! Graças ao ${interaction.user} os próximos 60 minutos TODOS do servidor terão sorte nas cartas. Se divirtam!`)
-                            datafrase.eventos.tipo = "comungar"
-                            writeDataFraseToFile(datafrase)
-                            setTimeout(async () => {
-                                datafrase.eventos.tipo = "normal"
-                                writeDataFraseToFile(datafrase)
-                                interaction.channel.send(`Tivemos o fim do Comungar... Uma boa sorte a todos!`)
-                            }, 3600000);
-                        }, 30000)
-                    }
-                }
                 //BÊNÇÃO DAS APOSTAS
-                if (roletabobby > 1040 && roletabobby <= 1080) {
+                if (roletabobby > 1030 && roletabobby <= 1080) {
                     embeds.setTitle(`BÊNÇÃO DAS APOSTAS`)
                     embeds.setDescription(`Talvez seja sorte? Ou você é apenas um gnomo ligeiro, mas isso não importa, o que importa é que os jogos do Bobby foram BURLADOS por você.\nEssa carta faz com que você consiga manipular a banca do Bobby, recebendo mais dinheiro em suas apostas.`)
                     embeds.setThumbnail("https://images2.imgbox.com/0c/6c/fjJMlCQU_o.png")
@@ -586,33 +547,11 @@ module.exports = {
                     interaction.channel.send(`🎉 ${randomMember.user.tag} é o seu BESTIEEEE HIIIIII😆!`);
                 }
                 //Higienização de Impurezas
-                if (roletabobby > 970 && roletabobby <= 975) {
+                if (roletabobby > 970 && roletabobby <= 980) {
                     embeds.setTitle(`HIGIENIZAÇÃO DE IMPUREZAS`)
                     embeds.setDescription(`Essa carta irá limpar todas as impurezas que você tem. Ela irá tirar todos os status negativos do seu perfil`)
                     embeds.setThumbnail("https://images2.imgbox.com/4d/4e/gZbo71Q5_o.png")
                     TIRARNEGATIVO(user)
-                }
-                //ESTRELA CADENTE
-                if (roletabobby > 975 && roletabobby <= 980) {
-                    if (datafrase.eventos.tipo != "normal") { roletabobby = 901 }
-                    if (roletabobby >= 975 && roletabobby <= 980) {
-                        embeds.setTitle(`ESTRELAS CADENTES`)
-                        embeds.setDescription(`É muito comum cair fragmentos Solares no nosso mundo. Muitas pessoas chamam esses fragmentos de Estrelas Cadentes e todos aqueles que acabam, por alguma sorte, vendo um, ganhará sorte até o final de suas vidas.\n\nEssa carta irá começar um evento em 1 minuto, onde todas as pessoas terão 10% de chance de ver uma Estrela Cadente, ganhando sorte Grande na carta. \n\nO evento tem duração de 60 minutos...`)
-                        embeds.setThumbnail("https://images2.imgbox.com/5c/aa/vb9SJvoe_o.png")
-                        datafrase.eventos.tipo = "bloqueado"
-                        datafrase.dados.cartastipoevento++
-                        writeDataFraseToFile(datafrase)
-                        setTimeout(async () => {
-                            interaction.channel.send(`@everyone !! Graças ao ${interaction.user} os próximos 60 minutos terão chance de cair uma estrela cadente!`)
-                            datafrase.eventos.tipo = "estrela"
-                            writeDataFraseToFile(datafrase)
-                            setTimeout(async () => {
-                                datafrase.eventos.tipo = "normal"
-                                interaction.channel.send(`Tivemos o fim das ESTRELAS CADENTES... Fragmentos Solares indicam uma boa sorte até o final da vida!`)
-                                writeDataFraseToFile(datafrase)
-                            }, 3600000);
-                        }, 30000)
-                    }
                 }
             }
             //12 SUPERIOR
@@ -732,33 +671,11 @@ module.exports = {
                     interaction.member.roles.add(randomItem.id);
                 }
                 //RENDA EXTRA
-                if (roletabobby > 940 && roletabobby <= 946) {
+                if (roletabobby > 940 && roletabobby <= 950) {
                     embeds.setTitle(`RENDA EXTRA`)
                     embeds.setDescription(`Essa carta vai te dar uma renda extra para sua vida. Você irá ganhar 5k Zens.`)
                     embeds.setThumbnail("https://images2.imgbox.com/45/dd/yNdBaPOt_o.png")
                     aplicarDinheiro(user, 5000, interaction.guild)
-                }
-                //GRAVIDADE INVERTIDA   
-                if (roletabobby > 946 && roletabobby <= 950) {
-                    if (datafrase.eventos.tipo != "normal") { roletabobby = 900 }
-                    if (roletabobby >= 942 && roletabobby <= 950) {
-                        embeds.setTitle(`GRAVIDADE INVERTIDA`)
-                        embeds.setDescription(`Essa carta irá quebrar a gravidade do servidor por 60 minutos, fazendo com que suas cartas sejam totalmente opostas. Esse evento vai acontecer em 1 minuto...`)
-                        embeds.setThumbnail("https://images2.imgbox.com/96/76/OAfyzC4U_o.png")
-                        datafrase.eventos.tipo = "bloqueado"
-                        datafrase.dados.cartastipoevento++
-                        writeDataFraseToFile(datafrase)
-                        setTimeout(async () => {
-                            interaction.channel.send(`@everyone !! Graças ao ${interaction.user} os próximos 60 minutos terão a sorte invertida!`)
-                            datafrase.eventos.tipo = "gravidade"
-                            writeDataFraseToFile(datafrase)
-                            setTimeout(async () => {
-                                datafrase.eventos.tipo = "normal"
-                                interaction.channel.send(`Tivemos o fim do GRAVIDADE INVERTIDA... Os cientistas finalmente conseguiram arrumar a gravidade do servidor!`)
-                                writeDataFraseToFile(datafrase)
-                            }, 3600000);
-                        }, 30000)
-                    }
                 }
             }
             //14/16 BENÉVOLA
@@ -768,52 +685,11 @@ module.exports = {
                 embeds.setAuthor({ name: `Benévola`, iconURL: "https://images2.imgbox.com/6d/fc/AEsRWlSK_o.png" })
                 embeds.setFooter({ text: `Chance: ${teste100}%` });
                 //OLHOS
-                if (roletabobby > 750 && roletabobby <= 760) {
+                if (roletabobby > 750 && roletabobby <= 770) {
                     embeds.setTitle(`OLHOS`)
                     embeds.setDescription(`Os olhos de Zerlar.`)
                     adicionarRole(interaction.member, Ids.artefatos.Olhos)
                     embeds.setThumbnail("https://images2.imgbox.com/f5/1c/1lbfJ92o_o.png")
-                }
-                //RAID  
-                if (roletabobby > 760 && roletabobby <= 770) {
-                    if (datafrase.eventos.tipo != "normal") { roletabobby = 800 }
-                    if (roletabobby >= 750 && roletabobby <= 751) {
-                        embeds.setTitle(`RAID`)
-                        embeds.setDescription(`Essa carta irá começar uma RAID, onde um boss aleatório irá surgir no servidor e todos vocês terão que se unir para combater ele! Caso vocês consigam matar o Boss, TODOS do servidor irão ganhar loot! Variando de efeitos, bônus e até artefatos! O dano no boss será contabilizado a cada jogada no Risorius baseado no seu equipamento. Boa sorte! Vocês terão 30 minutos para matar o chefão!`)
-                        embeds.setThumbnail("https://images2.imgbox.com/96/76/OAfyzC4U_o.png")
-                        datafrase.eventos.tipo = "bloqueado"
-                        datafrase.dados.cartastipoevento++
-                        writeDataFraseToFile(datafrase)
-                        setTimeout(async () => {
-                            const nomesDosBosses = Object.keys(datafrase.raid.bosses);
-                            const indiceAleatorio = Math.floor(Math.random() * nomesDosBosses.length);
-                            const nomeBoss = nomesDosBosses[indiceAleatorio];
-                            interaction.channel.send(`@everyone !! Uma RAID irá começar! O Boss será o/a **${nomeBoss}**... Boa sorte 😈`)
-                            datafrase.eventos.tipo = "raid"
-                            datafrase.eventos.chefe = nomeBoss
-                            writeDataFraseToFile(datafrase)
-                            setTimeout(async () => {
-                                for (const bossName in datafrase.raid.bosses) {
-                                    const boss = datafrase.raid.bosses[bossName];
-                                    if (boss.vida < boss.VidaMax) {
-                                        boss.vida = boss.VidaMax;
-                                        console.log(`A vida de ${bossName} foi restaurada para ${boss.VidaMax}.`);
-                                    }
-                                }
-                                if (datafrase.raid.resultado == "Vitoria") {
-                                    adicionarRoleTodos(interaction.guild, Ids.unicos.Bencao)
-                                } else if (datafrase.raid.resultado == "Ruivo") {
-                                    adicionarRoleTodos(interaction.guild, Ids.artefatos.Escamas)
-                                } else {
-                                    adicionarRoleTodos(interaction.guild, Ids.unicos.Maldicao)
-                                }
-                                await datafrase.raid.resultado == "Neutro"
-                                datafrase.eventos.tipo = "normal"
-                                interaction.channel.send(`Tivemos o fim de uma raid...`)
-                                writeDataFraseToFile(datafrase)
-                            }, 1000);
-                        }, 30000)
-                    }
                 }
                 //UMBRELA
                 if (roletabobby > 770 && roletabobby <= 780) {
@@ -1414,7 +1290,7 @@ module.exports = {
                 //AUDIENCIA DO SHOW
                 if (roletabobby > 679 && roletabobby <= 700) {
                     embeds.setTitle("AUDIÊNCIA DO JOGO")
-                    embeds.setDescription(`Essa carta mostra os dados atuais do jogo do Risorius. As risadas sempre serão o melhor remédio!\n\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━∎\n∎Vezes Usado: ${datafrase.dados.usos}\n\n∎Cartas Totais: ${totalcartas}\n\n∎Status Totais: ${datafrase.dados.statustotais}\n\n∎Eventos iniciados: ${datafrase.dados.cartastipoevento}\n\n∎Cartas Heresia Pegas: ${datafrase.dados.heresia}\n\n∎Cartas Comuns Pegas: ${datafrase.dados.CartasComunsPegas}\n\n∎Cartas Positivas Pegas: ${datafrase.dados.cartaspositivaspegas}\n\n∎Cartas Negativas Pegas: ${datafrase.dados.cartasnegativaspegas}\n\n∎Cartas Ancestrais Pegas: ${datafrase.dados.heresia}\n\n∎Estrelas Cadentes vistas: ${datafrase.dados.estrelas}\n\n∎Vezes que Foram Banidos: ${datafrase.dados.banidos}\n\n∎Vezes que Perderam Itens: ${datafrase.dados.perderiten}\n\n∎Vezes que Ganharam Itens: ${datafrase.dados.ganhariten}\n\n∎Vezes que Ficaram de Castigo: ${datafrase.dados.castigo}\n\n∎Vezes que Lunar/Solar Foram Pegos: ${datafrase.dados.lunarsolar}\n\n∎Vezes que Lembramos do Pietro Sapo: ${datafrase.dados.pietrosapo}\n\n∎Vezes que a Maldição do Caos Foi Pega: ${datafrase.dados.bobby}\n\n∎Vezes Que Copiaram uma | atraC moc ohlepsE: ${datafrase.dados.espelho}\n\n∎Vezes que Roubaram Status de Outro Jogador: ${datafrase.dados.roubos}\n\n∎Vezes que Pegaram os Valores de Dragão/Cofre: ${datafrase.dados.cofredragao}\n\n∎Vezes que Lembramos de Agradecer a Hatsune Miku: ${datafrase.dados.hatsune}\n┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━∎`)
+                    embeds.setDescription(`Essa carta mostra os dados atuais do jogo do Risorius. As risadas sempre serão o melhor remédio!\n\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━∎\n∎Vezes Usado: ${datafrase.dados.usos}\n\n∎Cartas Totais: ${totalcartas}\n\n∎Status Totais: ${datafrase.dados.statustotais}\n\n∎Cartas Heresia Pegas: ${datafrase.dados.heresia}\n\n∎Cartas Comuns Pegas: ${datafrase.dados.CartasComunsPegas}\n\n∎Cartas Positivas Pegas: ${datafrase.dados.cartaspositivaspegas}\n\n∎Cartas Negativas Pegas: ${datafrase.dados.cartasnegativaspegas}\n\n∎Cartas Ancestrais Pegas: ${datafrase.dados.heresia}\n\n∎Estrelas Cadentes vistas: ${datafrase.dados.estrelas}\n\n∎Vezes que Foram Banidos: ${datafrase.dados.banidos}\n\n∎Vezes que Perderam Itens: ${datafrase.dados.perderiten}\n\n∎Vezes que Ganharam Itens: ${datafrase.dados.ganhariten}\n\n∎Vezes que Ficaram de Castigo: ${datafrase.dados.castigo}\n\n∎Vezes que Lunar/Solar Foram Pegos: ${datafrase.dados.lunarsolar}\n\n∎Vezes que Lembramos do Pietro Sapo: ${datafrase.dados.pietrosapo}\n\n∎Vezes que a Maldição do Caos Foi Pega: ${datafrase.dados.bobby}\n\n∎Vezes Que Copiaram uma | atraC moc ohlepsE: ${datafrase.dados.espelho}\n\n∎Vezes que Roubaram Status de Outro Jogador: ${datafrase.dados.roubos}\n\n∎Vezes que Pegaram os Valores de Dragão/Cofre: ${datafrase.dados.cofredragao}\n\n∎Vezes que Lembramos de Agradecer a Hatsune Miku: ${datafrase.dados.hatsune}\n┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━∎`)
                     embeds.setThumbnail("https://images2.imgbox.com/04/7d/TRAuvCq5_o.png")
                 }
             }
@@ -1765,7 +1641,6 @@ module.exports = {
                         if (user.roles.cache.has(ADM)) { roletabobby = 49 }
                     }
                     if (roletabobby > 26 && roletabobby <= 32) {
-                        const comandos = interaction.client.channels.cache.get(comandosid);
                         embeds.setTitle(`BANIDO DO CAMPUS`)
                         embeds.setDescription(`Essa carta faz com que você seja banido até que as autoridades te liberem. Você não pode cuspir na cara do professor e falar que ele é um merda e falar que as IAs vão pegar o trabalho.`)
                         embeds.setThumbnail("https://images2.imgbox.com/02/6e/Kjvl86NZ_o.png")
@@ -1774,34 +1649,12 @@ module.exports = {
                             await user.timeout(3600000, `Você está banido até que volte com os advogados.`)
                         }, 4000)
                         setTimeout(async () => {
-                            comandos.send(`Após a chegada dos advogados, ${interaction.user} foi preso e agora está na liberdade condicional! \nTomem cuidado!`)
+                            interaction.channel.send(`Após a chegada dos advogados, ${interaction.user} foi preso e agora está na liberdade condicional! \nTomem cuidado!`)
                         }, 3600000)
                     }
                 }
-                //HORA CAÓTICA
-                if (roletabobby > 32 && roletabobby <= 36) {
-                    if (datafrase.eventos.tipo != "normal") { roletabobby = 49 }
-                    if (roletabobby > 32 && roletabobby <= 36) {
-                        embeds.setTitle(`HORA CAÓTICA`)
-                        embeds.setDescription(`Essa carta irá fazer com que suas cartas ou tenham um azar mediano ou tenham uma sorte mediana durante 60 minutos, variando a cada vez que usa. Esse evento vai acontecer em 1 minuto... O Risorius ficou caótico!`)
-                        embeds.setThumbnail("https://images2.imgbox.com/f2/2e/DzUNc0B5_o.png")
-                        datafrase.eventos.tipo = "bloqueado"
-                        datafrase.dados.cartastipoevento++
-                        writeDataFraseToFile(datafrase)
-                        setTimeout(async () => {
-                            interaction.channel.send(`@everyone !! Graças ao ${interaction.user} os próximos 60 minutos o Risorius terá ou uma sorte média ou dar um azar mediano. Se divirtam!`)
-                            datafrase.eventos.tipo = "caotico"
-                            writeDataFraseToFile(datafrase)
-                            setTimeout(async () => {
-                                datafrase.eventos.tipo = "normal"
-                                interaction.channel.send(`Tivemos o fim da -Hora Caótica-... MAS AS PIADAS PERMANECEM EM PÉ!`)
-                                writeDataFraseToFile(datafrase)
-                            }, 3600000);
-                        }, 30000)
-                    }
-                }
                 //SISTEMA QUEBRADO
-                if (roletabobby > 36 && roletabobby <= 40) {
+                if (roletabobby > 32 && roletabobby <= 40) {
                     embeds.setTitle(`SISTEMA QUEBRADO`)
                     embeds.setDescription(`Essa carta serve para aqueles que reclamam que o sistema está quebrando, fazendo com que SUAS PERNAS sejam quebradas!! Essa carta irá te dar o status Quebrado, fazendo com que toda vez que você jogue uma carta ela tenha 10% de chance de NÃO funcionar (caso não funcione, o cooldown irá se manter).`)
                     embeds.setThumbnail("https://images2.imgbox.com/86/0c/zOEcXkBx_o.png")
@@ -1895,28 +1748,8 @@ module.exports = {
                     datafrase.infos.espelho = roletabobby;
                     writeDataFraseToFile(datafrase);
                 }
-                //ANTI-VÍCIO
-                if (roletabobby > 11 && roletabobby <= 15) {
-                    if (datafrase.eventos.tipo != "normal") { roletabobby = 19 }
-                    if (roletabobby > 7 && roletabobby <= 12) {
-                        embeds.setTitle(`ANTI-VÍCIO`)
-                        embeds.setDescription(`Essa carta irá lembrar todos vocês que vício nunca é legal. Por 60 minutos, o Risorius estará BLOQUEADO para TODOS. Esse evento vai acontecer em 1 minuto...`)
-                        embeds.setThumbnail("https://images2.imgbox.com/ec/3c/53H1vuNb_o.png")
-                        datafrase.eventos.tipo = "bloqueado"
-                        datafrase.dados.cartastipoevento++
-                        writeDataFraseToFile(datafrase)
-                        setTimeout(async () => {
-                            interaction.channel.send(`@everyone !! Graças ao ${interaction.user} o Risorius estará indisponível por 60 minutos!`)
-                            setTimeout(async () => {
-                                datafrase.eventos.tipo = "normal"
-                                interaction.channel.send(`Tivemos o fim do Anti-Vício... Não se esqueçam que VÍCIO NÃO É LEGAL!`)
-                                writeDataFraseToFile(datafrase)
-                            }, 36000);
-                        }, 30000)
-                    }
-                }
                 //WORST FRIENDS FOREVER!
-                if (roletabobby > 15 && roletabobby <= 19) {
+                if (roletabobby > 11 && roletabobby <= 19) {
                     embeds.setTitle(`WORST FRIENDS FOREVER!`)
                     embeds.setDescription(`Nós somos Melhores Inimigos! Está escrito no fundo da privada!\nA carta irá pegar uma pessoa aleatória e fazer ela ser sua inimiga declarada. Ao estarem com cargos de WFFs, vocês irão compartilhar TODOS os status NEGATIVOS (Menos efeitos Lunares) que um dos dois pegarem em cartas.`)
                     embeds.setThumbnail("https://images2.imgbox.com/4c/f7/euESgdY3_o.png")
@@ -2095,30 +1928,8 @@ module.exports = {
                         await user.roles.remove(BAN);
                     }, timer)
                 }
-                //MALDIÇÃO DO MARLAN
-                if (roletabobby > -30 && roletabobby <= -15) {
-                    if (datafrase.eventos.tipo != "normal") { roletabobby = -50 }
-                    if (roletabobby > -30 && roletabobby <= -15) {
-                        embeds.setTitle(`MALDIÇÃO DE MARLAN`)
-                        embeds.setDescription(`Essa carta irá trazer a presença do Marlan, o Deus do Azar, deixando o mais puro azar e sentimentos extremos a todos, aumentando o azar das cartas de todos por 60 minutos. Esse evento vai acontecer em 10 minutos...\n\n(Esse azar acumula com outros status)`)
-                        embeds.setThumbnail("https://images2.imgbox.com/1b/ac/cMm40x99_o.png")
-                        datafrase.eventos.tipo = "bloqueado"
-                        datafrase.dados.cartastipoevento++
-                        writeDataFraseToFile(datafrase)
-                        setTimeout(async () => {
-                            interaction.channel.send(`@everyone !! Graças ao ${interaction.user} um pacto foi feito, trazendo a presença de Marlan, o Deus da Azar. Os próximos 60 minutos vocês terão azar em todas as cartas. O meu divertimento é a queda de vocês...`)
-                            datafrase.eventos.tipo = "marlan"
-                            writeDataFraseToFile(datafrase)
-                            setTimeout(async () => {
-                                datafrase.eventos.tipo = "normal"
-                                interaction.channel.send(`Tivemos o fim da Maldição do Pacto... Não se esqueçam`)
-                                writeDataFraseToFile(datafrase)
-                            }, 3600000);
-                        }, 30000)
-                    }
-                }
                 //MALDIÇÃO DE MALITIAS
-                if (roletabobby > -48 && roletabobby <= -30) {
+                if (roletabobby > -48 && roletabobby <= -15) {
                     embeds.setTitle(`MALDIÇÃO DE MALITIAS`)
                     embeds.setDescription(`Malitias, o Demônio do Ódio irá te Amaldiçoar, guardando seus sentimentos em ti. \nEssa carta faz com que Malitias ANULE a próxima carta divina que você for pegar, fazendo com que ela se torne uma carta azarada garantida.`)
                     embeds.setThumbnail("https://images2.imgbox.com/4a/43/YKMNLUKO_o.png")

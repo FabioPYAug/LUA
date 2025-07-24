@@ -1,4 +1,6 @@
-const { Client, Events, GatewayIntentBits, Collection } = require('discord.js')
+const { Client, Events, GatewayIntentBits, Collection, Partials } = require('discord.js');
+
+const { Citação, Niver, Ritual } = require('./includes/Timers.js');
 
 // dotenv
 const dotenv = require('dotenv')
@@ -16,8 +18,14 @@ const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent
-    ]
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMessageReactions, 
+    ],
+    partials: [
+        Partials.Message,
+        Partials.Channel,
+        Partials.Reaction,
+    ],
 });
 
 client.commands = new Collection()
@@ -33,7 +41,7 @@ for (const file of commandFiles){
 }
 
 client.once(Events.ClientReady, c => {
-	console.log(`Pronto! Login realizado como ${c.user.tag}`)
+	console.log(`O bot ${c.user.tag} está ligado✅`)
 });
 
 //TESTAR NO TERMINAL OS COMANDOS
@@ -74,6 +82,8 @@ client.on(Events.InteractionCreate, async interaction =>{
         console.error("Comando não encontrado")
         return
     }
+    console.log(`💫Comando usado: ${interaction.commandName} | 👤Usuário: ${interaction.user.tag}`);
+
     try {
         await command.execute(interaction)
     } 
@@ -117,3 +127,10 @@ if (process.argv[2] === 'test') {
 
     simulateCommand(commandName, options);
 }
+
+//ENVIO DE COISAS AUTOMATICO
+setInterval(() => {
+    Citação(client, 21, 0, "1099028132884926638");
+    Niver(client, "1099028132884926638");
+    Ritual(client, 21, 0, "1397977596985344100");
+}, 60000); 

@@ -49,31 +49,21 @@ module.exports = {
 
     async autocomplete(interaction) {
         const focusedOption = interaction.options.getFocused(true);
-        let choices;
-        const user = interaction.member;
-        //EM MANUTENÇÃO
-        if (!user.roles.cache.has(ADM)) {
-            interaction.reply({ content: "Risorius está em manutenção atualmente!", ephemeral: true })
-            return
-        }
-        if (focusedOption.name === "joaozinho") {
-            choices = ["Aparência", "Artes", "Competir", "Conselhos", "Dados", "Expressões", "Frase Aleatória", "Horóscopo", "Piadas", "Playlist", "Quantidade de Frases"]
-        }
-        if (focusedOption.name === "parisa") {
-            choices = ["Aparência", "Artes", "Competir", "Conselhos", "Dados", "Expressões", "Frase Aleatória", "Horóscopo", "Piadas", "Playlist", "Quantidade de Frases"]
-        }
-        if (focusedOption.name === "poyo") {
-            choices = ["Aparência", "Artes", "Competir", "Conselhos", "Dados", "Expressões", "Frase Aleatória", "Horóscopo", "Piadas", "Playlist", "Quantidade de Frases"]
-        }
-        if (focusedOption.name === "asterio") {
-            choices = ["Artes", "Competir", "Conselhos", "Dados", "Frase Aleatória", "Horóscopo", "Piadas", "Playlist", "Quantidade de Frases"]
-        }
-        const filtered = choices.filter(choice => choice.startsWith(focusedOption.value));
 
-        if (!interaction) return;
+        const optionsMap = {
+            joaozinho: ["Aparência", "Artes", "Competir", "Conselhos", "Dados", "Expressões", "Frase Aleatória", "Horóscopo", "Piadas", "Playlist", "Quantidade de Frases"],
+            parisa: ["Aparência", "Artes", "Competir", "Conselhos", "Dados", "Expressões", "Frase Aleatória", "Horóscopo", "Piadas", "Playlist", "Quantidade de Frases"],
+            poyo: ["Aparência", "Artes", "Competir", "Conselhos", "Dados", "Expressões", "Frase Aleatória", "Horóscopo", "Piadas", "Playlist", "Quantidade de Frases"],
+            asterio: ["Artes", "Competir", "Conselhos", "Dados", "Frase Aleatória", "Horóscopo", "Piadas", "Playlist", "Quantidade de Frases"]
+        };
 
+        const choices = optionsMap[focusedOption.name] || [];
+
+        const filtered = choices.filter(choice =>
+            choice.toLowerCase().startsWith(focusedOption.value.toLowerCase())
+        );
         await interaction.respond(
-            filtered.map(choice => ({ name: choice, value: choice })),
+            filtered.map(choice => ({ name: choice, value: choice }))
         );
     },
 
@@ -86,7 +76,6 @@ module.exports = {
         if (interaction.options.getString('asterio')) {
             const asterio = interaction.options.getString('asterio')
             const frase = JSON.parse(fs.readFileSync(frasespath, 'utf-8')).asteriofrases;
-            // const aparencia = JSON.parse(fs.readFileSync(frasespath, 'utf-8')).joaozinhoaparencia;
 
             if (asterio == "Artes") {
                 await interaction.reply("**Astério mostra o caminho de terra que ele fez e você repara que o caminho forma um **:)** distorcido**")

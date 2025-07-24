@@ -69,6 +69,26 @@ module.exports = {
                     description: 'Informações sobre os Equipamentos',
                     value: 'equipamento',
                 },
+                {
+                    label: 'Conjunto de Jogos de Zoystea',
+                    description: 'Informações sobre os Jogos de Zoystea',
+                    value: 'zoystea',
+                },
+                {
+                    label: 'Conjunto de Jogos de Aystea',
+                    description: 'Informações sobre os Jogos de Aystea',
+                    value: 'aystea',
+                },
+                {
+                    label: 'Comando /sussurros',
+                    description: 'Informações sobre o comando /sussurros',
+                    value: 'sussurros',
+                },
+                {
+                    label: 'Comando /documentos',
+                    description: 'Informações sobre o comando /documentos',
+                    value: 'documentos',
+                },
             ]);
 
         const menuRow = new ActionRowBuilder().addComponents(helpMenu);
@@ -96,6 +116,44 @@ module.exports = {
             let helpEmbed;
 
             switch (selectedCategory) {
+                case 'documentos':
+                    helpEmbed = new EmbedBuilder()
+                        .setTitle('Comando /documentos')
+                        .setDescription('Este comando permite escolher um dos documentos disponíveis no bot. Você pode escolher entre todos aqueles que foram apresentados durante as campanhas de RPG! Além disso, a pesquisa é inteligente, ou seja, poderá pesquisar por palavras similares como <livro> ou <quintana>.')
+                        .setColor('Red');
+                    break;
+                case 'sussurros':
+                    helpEmbed = new EmbedBuilder()
+                        .setTitle('Comando /sussurros')
+                        .setDescription('Este comando permite escolher uma das sessões das campanhas feitas até o momento. Ao escolher uma das sessões você irá receber no privado uma mensagem contendo o resumo da sessão escolhida.')
+                        .setColor('Green');
+                    break;
+                case 'aystea':
+                    helpEmbed = new EmbedBuilder()
+                        .setTitle('Comando /gamble')
+                        .setDescription('Este comando irá te mostrar uma seleção de jogos criados pelo Bobby. Nesses jogos você deverá apostar um valor mínimo de 1 ZENS e escolher qual jogo deseja apostar.\n\nO conjunto de Aystea é composto por:')
+                        .addFields(
+                            { name: 'CHARISMA', value: 'Irá tirar um número de 1 a 100 e cada um deles irá fazer algo com o seu dinheiro. T U D O é possível.' },
+                            { name: 'BORDADAS DADAS', value: 'A custo de 75 ZENS você irá comprar uma raspadinha onde cada um dos 9 espaços poderão ser ✅ (Vale algum ponto) ou ❌ (Não vale ponto). Irá somar todos os pontos da cartela e dependendo a soma irá pegar uma quantia de ZEN específica.' },
+                            { name: 'ANELISMO', value: 'Ainda não está pronto.' },
+                            { name: 'DINÔRIN', value: 'Ainda não está pronto.' },
+                            { name: 'CAVALONS', value: 'Ainda não está pronto.' },
+                        )
+                        .setColor('Purple');
+                    break;
+                case 'zoystea':
+                    helpEmbed = new EmbedBuilder()
+                        .setTitle('Comando /gamble')
+                        .setDescription('Este comando irá te mostrar uma seleção de jogos criados pelo Bobby. Nesses jogos você deverá apostar um valor mínimo de 1 ZENS e escolher qual jogo deseja apostar.\n\nO conjunto de Zoystea é composto por:')
+                        .addFields(
+                            { name: 'ALJAVA DE NARLON', value: 'Você tem 5 tentativas para pegar flechas de uma aljava com 20 flechas. Entre elas, 1 a 10 são mágicas. Se pegar flechas mágicas, perderá ZENS conforme a quantidade. Se não pegar nenhuma flecha mágica, ganhará ZENS conforme o número de flechas mágicas na aljava.' },
+                            { name: 'BOBBYSPOT', value: 'Irá roletar 3 icones e caso eles formem duplas ou trios você ganhará. Cada um deles equivale a um multiplicador especifico de ZENS, sendo as duplas menos que os trios.' },
+                            { name: 'CINQUENTINHA', value: 'Você irá jogar seu dinheiro em uma roleta 50% vermelha e 50% azul, caso você pegue azul você irá multiplicar seu dinheiro, senão irá perder tudo.' },
+                            { name: 'ESCOLHIDO PELA RISADA', value: 'Irá tirar um número de 1 a 10 e cada um deles irá fazer algo com o seu dinheiro, desde perder até multiplicar por 1d3.' },
+                            { name: '21 BOBBYS', value: 'Você irá jogar blackjack com Bobby (casa) e você precisa tirar mais que a quantidade de Bobby porém, tem que ser 21 ou menos. Caso ultrapasse 21 ou tire menos que a Casa, você perde.\n-Puxar: Digite no chat "puxar" para puxar mais uma carta;\n-Parar: Digite no chat "parar" para parar.\n\nCaso ganhe, irá multiplicar seu dinheiro.' },
+                        )
+                        .setColor('Purple');
+                    break;
                 case 'pix':
                     helpEmbed = new EmbedBuilder()
                         .setTitle('Comando /pix')
