@@ -1,29 +1,37 @@
-## LUA V.1.10.1
+# 🌙 LUA v1.14.0
 
-![GitHub repo size](https://img.shields.io/github/repo-size/FabioPYAug/LUA?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/FabioPYAug/LUA?style=for-the-badge)
-![GitHub open pull requests](https://img.shields.io/github/issues-pr/FabioPYAug/LUA?style=for-the-badge)
+**Bot para Discord ambientado no universo de Ordem — com eventos diários, minigames e interações únicas.**
 
-<p>Este bot foi criado com a intenção de facilitar a administração e as sessões de RPG online em um servidor de Discord. 
-Ele oferece uma série de funcionalidades que vão desde comandos úteis para as sessões até comandos engraçados voltados para a diversão.</p>
+---
 
-- Comandos de entretenimento: Além de comandos voltados para o RPG, o bot também conta com comandos engraçados e interativos para promover a diversão entre os membros.
-- Banco de imagens e ações: Utilizando um banco de dados em JSON, o bot é capaz de acessar e apresentar imagens e realizar ações pré-configuradas, trazendo mais dinâmica para as interações no servidor.
+## `/sussurros` — *"👁"*
 
+- Adicionados os sussurros de **O Conto do Príncipe** capítulos **5** e **6**.
+- Permite acessar conteúdos narrativos imersivos que complementam a história.
 
-<h4 align="center"> 
-	🚧  NOTAS DA ÚLTIMA ATUALIZAÇÃO  🚧
-</h4>
+---
 
-<h4>Sussurros Históricos</h4>
--Adicionado Circuz 1 e 2 e Tropical 06, 07, 08, 09 e 10;
+## `/ritual` — *"Rituais, muitos rituais"*
 
-- /sussurros - Pagar para descobrir segredinhos!!
+- **Novo minigame diário.**
+- Todos os dias às **21:00**, o bot envia uma imagem misteriosa no canal `#🔮│ritualístico`.
+- Seu objetivo: **adivinhar qual ritual está sendo representado.**
+- Use o comando `/ritual` para tentar descobrir. Nem todos os rituais estão visíveis de imediato — cogite pesquisar!
+- Quem acertar recebe:
+  - Efeito positivo no **Risorius**
+  - **5.000 Zens**
 
-- Você pode descobrir qualquer resumo de qualquer campanha que quiser!
+---
 
-<h4>/risorius - Ajustes</h4>
+## `opsário` — *"FELIZ ANIVERSÁRIO!"*
 
-- Agora você não pode votar mais de uma vez no "Duelo de Lendas";
-- A carta Echo não fica fixa em todas as outras cartas;
-- Não existe mais a carta "Sussurros Históricos";
+- Agora, o bot celebra os aniversários dos personagens do universo de Ordem!
+- No dia do aniversário, será enviada uma mensagem no canal `#📢│chat-geral`.
+- Se você reagir com o emoji no mesmo dia, ganha **Zens** como recompensa!
+
+---
+
+## `/risorius` — *"F"*
+
+- O sistema **Risorius** ficará em **pausa temporária**.
+- Ele está sendo **refatorado** para futuras melhorias e novas funcionalidades.
