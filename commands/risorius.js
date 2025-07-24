@@ -101,8 +101,8 @@ module.exports = {
         ninho = datafrase.infos.ninho
         imperador = datafrase.infos.dinastia
         //BLOQUEADO
-        if (user.roles.cache.has(BAN)) {
-            interaction.reply({ content: "Você está banido do Risorius.", ephemeral: true })
+        if (!user.roles.cache.has(ADM)) {
+            interaction.reply({ content: "Risorius está sendo atualizado! Novidades em breve...", ephemeral: true })
             return
         }
 
@@ -1641,7 +1641,6 @@ module.exports = {
                         if (user.roles.cache.has(ADM)) { roletabobby = 49 }
                     }
                     if (roletabobby > 26 && roletabobby <= 32) {
-                        const comandos = interaction.client.channels.cache.get(comandosid);
                         embeds.setTitle(`BANIDO DO CAMPUS`)
                         embeds.setDescription(`Essa carta faz com que você seja banido até que as autoridades te liberem. Você não pode cuspir na cara do professor e falar que ele é um merda e falar que as IAs vão pegar o trabalho.`)
                         embeds.setThumbnail("https://images2.imgbox.com/02/6e/Kjvl86NZ_o.png")
@@ -1650,7 +1649,7 @@ module.exports = {
                             await user.timeout(3600000, `Você está banido até que volte com os advogados.`)
                         }, 4000)
                         setTimeout(async () => {
-                            comandos.send(`Após a chegada dos advogados, ${interaction.user} foi preso e agora está na liberdade condicional! \nTomem cuidado!`)
+                            interaction.channel.send(`Após a chegada dos advogados, ${interaction.user} foi preso e agora está na liberdade condicional! \nTomem cuidado!`)
                         }, 3600000)
                     }
                 }

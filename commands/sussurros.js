@@ -11,13 +11,14 @@ const extrairTitulo = (texto) => {
 
 const campanhaImagem = {
     'SOLARENS': 'https://images2.imgbox.com/b6/52/q7Nf0vdh_o.png',
-    'NOITEESCURA': 'https://images2.imgbox.com/a1/46/xkfejCBm_o.png',
+    'PNOITEESCURA': 'https://images2.imgbox.com/a1/46/xkfejCBm_o.png',
     'EMPIREO': 'https://images2.imgbox.com/c9/61/D0xuAP00_o.png',
     'EDFU': 'https://images2.imgbox.com/7f/82/0s1UlP5q_o.png',
     'AFANO': 'https://images2.imgbox.com/4a/1e/jZ4jAfgH_o.png',
     'TROPICAL': 'https://images2.imgbox.com/80/f4/ZuEe2Pve_o.png',
     'THANATOS': 'https://images2.imgbox.com/40/b1/zwuJIKfb_o.png',
-    'CIRCUZ': 'https://images2.imgbox.com/13/98/otWMfDuz_o.png',
+    'OCONTODOPRINCIPE': 'https://i.ibb.co/9BsFSg4/teste.jpg',
+    'TENTAMEN': 'https://images2.imgbox.com/13/98/otWMfDuz_o.png'
 };
 
 module.exports = {

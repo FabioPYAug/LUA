@@ -119,7 +119,8 @@ const Ids = {
         Lingua: "1254169214453944491",
         Leigo: "1290956360661602354",
         Marlan: "1251047418833797120",
-        Malitias: "1251047479496151071"
+        Malitias: "1251047479496151071",
+        Envelope: "1395836984408146041"
     },
     usuarios: {
         amanda: "407937359389261858",
@@ -133,7 +134,8 @@ const Ids = {
         otavio: "1002730228998742067",
         vitor: "340298478494154752",
         paulo: "862809964401393665",
-        thuany: "406048394650451969"
+        thuany: "406048394650451969",
+        cris: "419667623324811267"
     }
 };
 
@@ -283,7 +285,6 @@ function EFEITOS(roletabobby, user) {
         let eventualidade = Math.floor(Math.random() * 100) + 1;
         if (user.roles.cache.has(id) && id == "1245128518422102097") { //GLORIFICADO
             user.roles.remove(id);
-            console.log("GLORIFICADO: " + valor)
             roletabobby = valor
         } else if (user.roles.cache.has(id) && id == "1254198559872647298") { //NORMALIZATOR
             if (roletabobby < 300) {
@@ -292,40 +293,33 @@ function EFEITOS(roletabobby, user) {
             if (roletabobby > 750) {
                 roletabobby -= valor;
             }
-            console.log("NORMALIZATOR: " + roletabobby)
             user.roles.remove(id);
         } else if (user.roles.cache.has(id) && id == "1245812621081579622") { //COFRE DA DINASTIA
             user.roles.remove(id);
-            console.log("COFRE: " + valor)
             roletabobby += valor
             datafrase.infos.dinastia = 1
 
         } else if (user.roles.cache.has(id) && id == "1245132705037815849") { //PADRÃOZINHO
-            console.log("PADRÃOZINHO: " + valor)
+
             user.roles.remove(id);
             roletabobby = valor
         } else if (user.roles.cache.has(id) && id == "1244742336408457266") { //MEIA NOVE
-            console.log("MEIA NOVE: " + valor)
             user.roles.remove(id);
             if (eventualidade <= 50) { roletabobby = roletabobby + (valor * trevodourado) }
             if (eventualidade > 50) { roletabobby = roletabobby - (valor * Lingua) }
         } else if (user.roles.cache.has(id) && id == "1245595127452536832") { //ENTRELAÇADOS
             if (datafrase.infos.laços != 0) {
-                console.log("ENTRELAÇADOS: " + valor)
                 roletabobby += valor
                 datafrase.infos.laços -= 1
             }
         } else if (user.roles.cache.has(id) && id == "1293498591263850528") { //EVENTUALIDADE
-            console.log("EVENTUALIDADE: " + eventualidade)
             if (eventualidade >= 0 && eventualidade <= 26) {
                 roletabobby = roletabobby + (valor)
             }
         } else if (user.roles.cache.has(id) && id == "1251362458313166858") { //CONTRAÇÃO
             user.roles.remove(id);
-            console.log("CONTRAÇÃO: " + eventualidade)
             roletabobby = valor - (roletabobby - valor);
         } else if (user.roles.cache.has(id)) {
-            console.log("GERAL")
             user.roles.remove(id);
             roletabobby += valor
         }
@@ -338,107 +332,6 @@ function EFEITOS(roletabobby, user) {
         console.error("Erro ao escrever no arquivo:", error);
     }
     return roletabobby;
-}
-
-async function EVENTOS(roletabobby, EventoAtual, interaction, guild) {
-    const member = await guild.members.fetch(interaction.user.id);
-
-    //EVENTO GRAVIDADE
-    if (EventoAtual == "gravidade") {
-        roletabobby = 500 - (roletabobby - 500)
-    }
-
-    //ESTRELA CADENTE
-    if (EventoAtual == "estrela") {
-        var teste2 = Math.floor(Math.random() * 10) + 1;
-        if (teste2 == 10) {
-            datafrase.dados.estrelas++
-            roletabobby = roletabobby + 150
-            interaction.channel.send(`☄${interaction.user} viu uma estrela cadente caindo do céu...☄`)
-        }
-    }
-    //COMUNGAR
-    if (EventoAtual == "comungar") {
-        roletabobby = roletabobby + 80
-    }
-    //MARLAN
-    if (EventoAtual == "marlan" && !member.roles.cache.has(Ids.artefatos.Umbrela)) {
-        console.log("CHEUGIE APJNFJOPSDAVFAKJGBFDK")
-        roletabobby = roletabobby - 80
-    }
-    //CAOTICO
-    if (EventoAtual == "caotico" && !member.roles.cache.has(Ids.artefatos.Umbrela)) {
-        var teste2 = Math.floor(Math.random() * 10) + 1;
-        if (teste2 > 5) { roletabobby = roletabobby + 80 }
-        if (teste2 <= 5) { roletabobby = roletabobby - 80 }
-    }
-    console.log(`Valor de Eventos: ${roletabobby}`)
-    writeDataFraseToFile(datafrase)
-    return (roletabobby)
-}
-
-function calcularDano(tipo) {
-    switch (tipo) {
-        case "EspadaCurta":
-            return Math.floor(Math.random() * 6) + 1;
-            break;
-        case "EspadaLonga":
-            return Math.floor(Math.random() * 8) + 1;
-            break;
-        case "CajadoMagico":
-            return Math.floor(Math.random() * 6) + 1;
-            break;
-        case "Parisa":
-            return Math.floor(Math.random() * 8) + 1 + Math.floor(Math.random() * 8) + 1 + Math.floor(Math.random() * 8) + 1;
-            break;
-        case "FoiceHurn":
-            return Math.floor(Math.random() * 10) + 1 + Math.floor(Math.random() * 8) + 1 + Math.floor(Math.random() * 12) + 1;
-            break;
-        case "CeifadoraDoLuar":
-            return Math.floor(Math.random() * 20) + 1 + Math.floor(Math.random() * 20) + 1;
-            break;
-        default:
-            return Math.floor(Math.random() * 4);
-            break;
-    }
-}
-
-function obterEquipamento(user, equipamentosDisponiveis) {
-    for (const [nome, id] of Object.entries(equipamentosDisponiveis)) {
-        if (user.roles.cache.has(id)) {
-            return { nome, teste: "1d6" }; 
-        }
-    }
-    return { nome: "Nenhum equipamento", teste: "N/A" };
-}
-
-async function RaidBoss(boss, user) {
-    console.log("Boss recebido:", boss);
-
-    if (!datafrase.raid.bosses[boss]) {
-        console.error(`Boss "${boss}" não encontrado.`);
-        return;
-    }
-    const cor = datafrase.raid.bosses[boss].cor
-    const equipamento = await obterEquipamento(user, Ids.equipamentos);
-    const dano = calcularDano(equipamento.nome);
-    datafrase.raid.bosses[boss].vida -= dano
-    if(datafrase.raid.bosses[boss].vida <= 0){
-        datafrase.raid.resultado = "Vitoria"
-    }
-    if(datafrase.raid.bosses[boss].Lenda == "Ruivo" && datafrase.raid.bosses[boss].vida <= 0){
-        datafrase.raid.resultado = "Ruivo"
-    }
-    
-    const bossfight = new EmbedBuilder()
-        .setTitle(`${boss}`)
-        .setColor(cor || '#FFFFFF')
-        .setDescription(`O ${user.nickname || user.user.username} utilizou ${equipamento.nome}`)
-        .addFields(
-            { name: 'Dano Causado', value: dano.toString(), inline: true }
-        );
-    writeDataFraseToFile(datafrase)
-    return bossfight;
 }
 
 async function BFFs(guild, statustipo, tipo) {
@@ -741,23 +634,34 @@ function RandomEfeitoPositivo(tipo) {
 
 }
 
+function VerificarDinheiro(user) {
+    for (const nome in Ids.usuarios) {
+        if (Ids.usuarios.hasOwnProperty(nome)) {
+            const id = Ids.usuarios[nome];
+            if (id == user.id) {
+                return datadinheiro.DINHEIRO[nome] || 0;
+            }
+        }
+    }
+    return 0;
+}
+
 module.exports = {
     Artefatos,
     TIRARPOSITIVO,
     TIRARNEGATIVO,
     EFEITOS,
-    EVENTOS,
     BFFs,
     EVOLUCAO,
     OutrosValores,
     adicionarRole,
     TIRARARTEFATOS,
     Ids,
-    RaidBoss,
     aplicarDinheiro,
     aplicarDinheiroTodos,
     adicionarRoleTodos,
     RandomEfeitoPositivo,
     TIRAREQUIPAMENTO,
-    TIRARARTEFATO
+    TIRARARTEFATO,
+    VerificarDinheiro
 };

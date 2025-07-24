@@ -22,14 +22,13 @@ module.exports = {
             const data = readFileSync(filePath);
             reports = JSON.parse(data);
         }
-        var user = interaction.user.tag
+        var user = interaction.user.username;
         var data = new Date().toISOString();
         var ano = data.substring(0, 4);
         reports.push(`*"${conteudo}" - ${user}, ${ano}*`);
 
 
         writeFileSync(filePath, JSON.stringify(reports, null, 2));
-
         await interaction.reply({ content: 'Citação salva com sucesso!', ephemeral: true });
     }
 };
