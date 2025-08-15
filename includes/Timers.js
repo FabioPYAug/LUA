@@ -2,11 +2,17 @@ const { readFileSync, writeFileSync } = require('fs');
 const path = require('path');
 const { EmbedBuilder } = require('discord.js');
 const { adicionarRole, aplicarDinheiro, Ids } = require('../includes/functions.js');
-
+const cargoss = "1405232614121672714";
+const cargosabido = "1405238506732781739";
+const cargoDiario = "1405234434541748224";
 const frasesPath = path.join(__dirname, '..', 'comunidade', 'citações.json');
 const ritualPath = path.join(__dirname, '..', 'comunidade', 'ritual.json');
 const aniversariosPath = path.join(__dirname, '..', 'comunidade', 'oprsario.json');
 const ritualDoDiaPath = path.join(__dirname, '..', 'comunidade', 'ritual_do_dia.json');
+const tokenPath = path.join(__dirname, '..', 'comunidade', 'tokens.json');
+const tokenDoDiaPath = path.join(__dirname, '..', 'comunidade', 'tokens_do_dia.json');
+const ritualCommand = require('../commands/ritual.js');
+const tokensCommand = require('../commands/tokens.js');
 
 const Citação = (client, targetHour, targetMinute, targetChannelId) => {
     const now = new Date();
@@ -28,7 +34,7 @@ const Citação = (client, targetHour, targetMinute, targetChannelId) => {
 
             if (frases.length > 0) {
                 const fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
-                channel.send(fraseAleatoria);
+                channel.send('**' + fraseAleatoria + '**' + `\n\n\n<@&${cargosabido}>`);
             } else {
                 channel.send('Nenhuma frase disponível no momento.');
             }
@@ -99,7 +105,7 @@ const Niver = (client, targetChannelId) => {
 
             ultimaDataExecucaoNiver = currentDate;
 
-            channel.send({ content: '@everyone', embeds: [embed] }).then(async sentMessage => {
+            channel.send({ content: `<@&${cargoss}>`, embeds: [embed] }).then(async sentMessage => {
                 const emoji = '🎉';
                 try {
                     await sentMessage.react(emoji);
@@ -143,6 +149,7 @@ const Ritual = (client, targetHour, targetMinute, targetChannelId) => {
     const currentMinute = now.getMinutes();
 
     if (currentHour === targetHour && currentMinute === targetMinute) {
+        ritualCommand.clearAllCooldowns();
         const channel = client.channels.cache.get(targetChannelId);
 
         let rituais = [];
@@ -171,9 +178,54 @@ const Ritual = (client, targetHour, targetMinute, targetChannelId) => {
         const embed = new EmbedBuilder()
             .setTitle(`Ritual de ${now.toLocaleDateString('pt-BR')}!`)
             .setDescription(
-                `## AVISOS\n- Para participar, use o comando \`/ritual\` nesse chat e escolha o ritual correto!\n- Você ter apenas uma tentativa então escolha bem!\n- Por fim, aqui tem rituais dos dois livros e homebrew!\n\n- DICA: || ${ritualAleatorio.dica} ||`
+                `<@&${cargoDiario}>\n## AVISOS\n- Para participar, use o comando \`/ritual\` nesse chat e escolha o ritual correto!\n- Você tem apenas uma tentativa então escolha bem!\n- Por fim, aqui tem rituais dos dois livros e homebrew!\n\n- **ATUALMENTE TEMOS *${rituais.length}* RITUAS NO BANCO!**\n\n- DICA: || ${ritualAleatorio.dica} ||`
             )
             .setImage(ritualAleatorio.imagem)
+            .setColor(0x6e00ff);
+
+        channel.send({ embeds: [embed] });
+
+    }
+};
+
+const Tokens = (client, targetHour, targetMinute, targetChannelId) => {
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+
+    if (currentHour === targetHour && currentMinute === targetMinute) {
+        tokensCommand.clearAllCooldowns();
+        const channel = client.channels.cache.get(targetChannelId);
+
+        let tokens = [];
+        try {
+            const data = readFileSync(tokenPath, 'utf-8').trim();
+            tokens = JSON.parse(data);
+        } catch (err) {
+            console.error('Erro ao ler tokens:', err);
+            return;
+        }
+
+        if (tokens.length === 0) {
+            channel.send('Nenhum token disponível.');
+            return;
+        }
+
+        const tokenAleatório = tokens[Math.floor(Math.random() * tokens.length)];
+
+        try {
+            writeFileSync(tokenDoDiaPath, JSON.stringify(tokenAleatório, null, 2));
+        } catch (err) {
+            console.error('Erro ao salvar o token do dia:', err);
+        }
+        const { EmbedBuilder } = require('discord.js');
+
+        const embed = new EmbedBuilder()
+            .setTitle(`DE QUEM É A SILHUETA? Dia: ${now.toLocaleDateString('pt-BR')}!`)
+            .setDescription(
+                `<@&${cargoDiario}>\n## AVISOS\n- Para participar, use o comando \`/personagem\` nesse chat e escolha o personagem correto pela silhueta do token!\n- Você tem apenas uma tentativa então escolha bem!\n- Por fim, aqui tem tokens de **Noite Escura** e **Ordem Paranormal**\n\n- **ATUALMENTE TEMOS *${tokens.length}* TOKENS NO BANCO!**`
+            )
+            .setImage(tokenAleatório.imagem)
             .setColor(0x6e00ff);
 
         channel.send({ embeds: [embed] });
@@ -184,5 +236,6 @@ const Ritual = (client, targetHour, targetMinute, targetChannelId) => {
 module.exports = {
     Citação,
     Niver,
-    Ritual
+    Ritual,
+    Tokens
 };
