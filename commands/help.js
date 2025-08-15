@@ -89,6 +89,11 @@ module.exports = {
                     description: 'Informações sobre o comando /documentos',
                     value: 'documentos',
                 },
+                {
+                    label: 'Comando /cargo',
+                    description: 'Informações sobre o comando /cargo',
+                    value: 'cargo',
+                },
             ]);
 
         const menuRow = new ActionRowBuilder().addComponents(helpMenu);
@@ -116,6 +121,12 @@ module.exports = {
             let helpEmbed;
 
             switch (selectedCategory) {
+                case 'cargo':
+                    helpEmbed = new EmbedBuilder()
+                        .setTitle('Comando /cargo')
+                        .setDescription('Este comando permite escolher um dos documentos disponíveis no bot. Você pode escolher entre todos aqueles que foram apresentados durante as campanhas de RPG! Além disso, a pesquisa é inteligente, ou seja, poderá pesquisar por palavras similares como <livro> ou <quintana>.')
+                        .setColor('Navy');
+                    break;
                 case 'documentos':
                     helpEmbed = new EmbedBuilder()
                         .setTitle('Comando /documentos')
@@ -268,20 +279,6 @@ module.exports = {
                             { name: 'WFFS', value: 'Irá compartilhar os efeitos de azar com outras pessoas que também possuem esse efeito' }
                         )
                         .setColor('Red');
-                    break;
-                case 'equipamento':
-                    helpEmbed = new EmbedBuilder()
-                        .setTitle('Equipamentos')
-                        .setDescription('Equipamentos são itens que os user podem pegar para auxiliar em Raids. Eles são:')
-                        .addFields(
-                            { name: 'ESPADA CURTA', value: 'Causa 1d6 de dano' },
-                            { name: 'ESPADA LONGA', value: 'Causa 1d8 de dano' },
-                            { name: 'CAJADO MÁGICO', value: 'Causa 1d6 de dano' },
-                            { name: 'PARISA', value: 'Causa 3d8 de dano' },
-                            { name: 'FOICE DE HURN', value: 'Causa 1d10 + 1d8 + 1d12 de dano' },
-                            { name: 'CEIFADORA DO LUAR', value: 'Causa 2d20 de dano' }
-                        )
-                        .setColor('DarkOrange');
                     break;
                 case 'artefatos':
                     helpEmbed = new EmbedBuilder()
